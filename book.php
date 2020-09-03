@@ -1,40 +1,13 @@
 <?php
 
-class Book {
+require_once 'models/Book.php';
 
-    protected $title;
-    protected $inStock = true;
-    protected $stockSaldo;
-
-    public function __construct($t) {
-        $this->title = $t;
-    }
-
-    public function getStocksaldo() {
-        return $this->stockSaldo;
-    }
-
-    public function setStocksaldo($v) {
-        if ($v < 0) {
-            throw new Exeption('Value should not be negative');
-        } else {
-            $this->stockSaldo = $v;
-        }
-    }
-    public function soldOut() {
-        $this->inStock = false;
-    }
-
-}
-
-$book = new Book('Kalevipoeg');
-$book2 = new Book('Rehepapp');
-
-$book2->soldOut();
-$book->setStocksaldo(15);
-$book2->setStocksaldo(18);
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$book = Book::findById($id);
 
 
 var_dump($book);
-var_dump($book2);
-var_dump($book->getStocksaldo());
+
+?>
+
+<h1><?php echo $book->title; ?></h1>
