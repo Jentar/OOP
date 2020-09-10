@@ -28,4 +28,13 @@ class Book {
 
     }
 
+    public function delete() {
+
+        global $pdo;
+
+        $stmt = $pdo->prepare('DELETE FROM books WHERE id=:id');
+
+        return $stmt->execute(['id' => $this->id]);
+
+    }
 }
